@@ -1,4 +1,4 @@
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -35,3 +35,8 @@ export const TransactionsType = styled.View`
     margin-top: 8px;
     margin-bottom: 16px;
 `;
+
+export const CategoryModal = styled.Modal.attrs({
+    animationType: 'slide',
+    presentationStyle: 'pageSheet',
+})``;

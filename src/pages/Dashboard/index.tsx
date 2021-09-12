@@ -11,6 +11,7 @@ import {
     UserGreeting,
     UserName,
     Icon,
+    LogoutButton,
     HighlightCards,
     Transactions,
     Title,
@@ -72,7 +73,9 @@ export function Dashboard() {
                             <UserName>Arthur</UserName>
                         </User>
                     </UserInfo>
-                    <Icon name="power" />
+                    <LogoutButton onPress={() => { }}>
+                        <Icon name="power" />
+                    </LogoutButton>
                 </UserWrapper>
             </Header>
 
@@ -91,7 +94,7 @@ export function Dashboard() {
                 />
                 <HighlightCard
                     type="total"
-                    title="Saídas"
+                    title="Total"
                     amount="R$ 500,00"
                     lastTransaction="Última saída dia 11 de abril"
                 />
