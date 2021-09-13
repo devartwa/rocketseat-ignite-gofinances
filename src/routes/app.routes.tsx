@@ -61,7 +61,7 @@ export function AppRoutes() {
                     tabBarIcon: (({ size, color }) => (
                         <MaterialIcons
                             name="pie-chart"
-                            size={size}
+                            size={32}
                             color={color}
                         />
                     ))
