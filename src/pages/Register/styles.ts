@@ -37,6 +37,6 @@ export const TransactionsType = styled.View`
 `;
 
 export const CategoryModal = styled.Modal.attrs({
-    animationType: 'slide',
-    presentationStyle: 'pageSheet',
+  animationType: 'slide',
+  presentationStyle: 'pageSheet',
 })``;
