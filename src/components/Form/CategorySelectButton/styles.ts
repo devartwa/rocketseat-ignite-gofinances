@@ -4,7 +4,6 @@ import { RectButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled(RectButton).attrs({
-    activeOpacity: 0.7
 })`
     background-color: ${({ theme }) => theme.colors.shape};
     flex-direction: row;
