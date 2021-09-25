@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 interface TypeProps {
-    type: 'up' | 'down';
+    type: 'positive' | 'negative';
     isActive: boolean;
 }
 
@@ -15,11 +15,11 @@ export const Container = styled.View<TypeProps>`
     border-color: ${({ theme }) => theme.colors.text};
     border-radius: 5px;
 
-    ${({ isActive, type }) => isActive && type === 'up' && css`
+    ${({ isActive, type }) => isActive && type === 'positive' && css`
         background-color: ${({ theme }) => theme.colors.success_light};
     `};
 
-    ${({ isActive, type }) => isActive && type === 'down' && css`
+    ${({ isActive, type }) => isActive && type === 'negative' && css`
         background-color: ${({ theme }) => theme.colors.attention_light};
     `};
 `;
@@ -36,11 +36,11 @@ export const Icon = styled(Feather) <TypeProps>`
     margin-right: 12px;
 
     color: ${({ isActive, theme, type }) => {
-        if (isActive && type === 'down') {
+        if (isActive && type === 'negative') {
             return theme.colors.shape;
-        } else if (type === 'down') {
+        } else if (type === 'negative') {
             return theme.colors.attention;
-        } else if (isActive && type === 'up') {
+        } else if (isActive && type === 'positive') {
             return theme.colors.shape;
         } else {
             return theme.colors.success;
@@ -52,11 +52,11 @@ export const Title = styled.Text<TypeProps>`
     font-size: ${RFValue(14)}px;
     font-family: ${({ theme }) => theme.fonts.regular};
 
-    ${({ isActive, type }) => isActive && type === 'up' && css`
+    ${({ isActive, type }) => isActive && type === 'positive' && css`
         color: ${({ theme }) => theme.colors.shape};
     `};
 
-    ${({ isActive, type }) => isActive && type === 'down' && css`
+    ${({ isActive, type }) => isActive && type === 'negative' && css`
         color: ${({ theme }) => theme.colors.shape};
     `};
 `;

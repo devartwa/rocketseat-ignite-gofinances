@@ -39,14 +39,17 @@ export const Photo = styled.Image`
     height: ${RFValue(48)}px;
     border-radius: 10px;
 `;
+
 export const User = styled.View`
     margin-left: 17px;
 `;
+
 export const UserGreeting = styled.Text`
     color: ${({ theme }) => theme.colors.shape};
     font-size: ${RFValue(18)}px;
     font-family: ${({ theme }) => theme.fonts.regular};
 `;
+
 export const UserName = styled.Text`
     color: ${({ theme }) => theme.colors.shape};
     font-size: ${RFValue(18)}px;
@@ -75,10 +78,26 @@ export const Transactions = styled.View`
     padding: 0 24px;
     margin-top: ${RFPercentage(12)}px;
 `;
+
+export const TitleWrapper = styled.View`
+    flex-direction: row;
+    margin-bottom: 16px;
+    justify-content: space-between;
+    align-items: center;
+`;
+
 export const Title = styled.Text`
     font-size: ${RFValue(18)}px;
     font-family: ${({ theme }) => theme.fonts.regular};
-    margin-bottom: 16px;
+`;
+
+export const ClearButton = styled(BorderlessButton)`
+`;
+
+export const ClearText = styled.Text`
+    font-size: ${RFValue(12)}px;
+    font-family: ${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.attention};
 `;
 
 export const TransactionsList = styled(
@@ -89,3 +108,24 @@ export const TransactionsList = styled(
         paddingBottom: getBottomSpace()
     }
 })``;
+
+export const ContainerLoading = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const Loading = styled.ActivityIndicator``;
+
+export const EmptyView = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const EmptyText = styled.Text`
+    margin-top: 25px;
+    font-size: ${RFValue(14)}px;
+    font-family: ${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.primary}
+`;
