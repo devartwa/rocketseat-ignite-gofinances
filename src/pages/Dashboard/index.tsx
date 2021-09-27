@@ -135,8 +135,8 @@ export function Dashboard() {
 
     async function clearTransactions() {
         Alert.alert(
-            "Cuidado! Suas ações não poderão ser desfeitas.",
-            "Tem certeza que deseja limpar as transações?",
+            "Cuidado! Essa ação não poderá ser desfeita.",
+            "Tem certeza que deseja limpar as suas transações?",
             [
                 {
                     text: "Cancelar",
