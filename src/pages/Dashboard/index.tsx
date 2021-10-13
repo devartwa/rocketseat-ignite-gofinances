@@ -190,6 +190,20 @@ export function Dashboard() {
                             `@gofinances:transactions_user:${user.id}`
                         );
                         setData([]);
+                        setHighlignData({
+                            entries: {
+                                amount: 'R$ 0,00',
+                                date: 'Não há transações',
+                            },
+                            expensive: {
+                                amount: 'R$ 0,00',
+                                date: 'Não há transações',
+                            },
+                            total: {
+                                amount: 'R$ 0,00',
+                                date: 'Não há transações',
+                            },
+                        });
                     },
                     style: "destructive",
                 },
