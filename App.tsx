@@ -4,8 +4,7 @@ import 'intl/locale-data/jsonp/pt-BR';
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
-import { AppRoutes } from './src/routes/app.routes';
-import { NavigationContainer } from '@react-navigation/native';
+import { Routes } from './src/routes';
 import {
     useFonts,
     Poppins_400Regular,
@@ -15,6 +14,7 @@ import {
 
 import theme from './src/global/styles/theme';
 import { StatusBar } from 'expo-status-bar';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -23,16 +23,18 @@ export default function App() {
         Poppins_700Bold
     });
 
-    if (!fontsLoaded) {
+    const { userLoading } = useAuth();
+
+    if (!fontsLoaded || userLoading) {
         return <AppLoading />
     }
 
     return (
         <ThemeProvider theme={theme}>
-            <NavigationContainer>
-                <StatusBar style="light" />
-                <AppRoutes />
-            </NavigationContainer>
+            <StatusBar style="light" />
+            <AuthProvider>
+                <Routes />
+            </AuthProvider>
         </ThemeProvider>
     )
 }

@@ -12,6 +12,7 @@ import { TransactionTypeButton } from '../../components/Form/TransactionTypeButt
 import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
 import { CategorySelect } from '../CategorySelect';
 import { useFocusEffect } from '@react-navigation/core';
+import { useAuth } from '../../hooks/auth';
 
 import {
     Container,
@@ -22,7 +23,6 @@ import {
     TransactionsType,
     CategoryModal
 } from './styles';
-
 interface FormData {
     name: string;
     amount: string;
@@ -39,13 +39,15 @@ const schema = Yup.object().shape({
 });
 
 export function Register() {
-
+    const { user } = useAuth();
     const [transactionType, setTransactionType] = useState('');
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
     const [category, setCategory] = useState({
         key: 'category',
         name: 'Categoria'
     });
+
+    const isMounted = React.useRef(true);
 
     const { handleSubmit, control, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -80,7 +82,7 @@ export function Register() {
         }
 
         try {
-            const oldData = await AsyncStorage.getItem('@gofinances:transactions');
+            const oldData = await AsyncStorage.getItem(`@gofinances:transactions_user:${user.id}`);
             const transactionsData = oldData ? JSON.parse(oldData) : [];
 
             const dataFormatted = [
@@ -88,7 +90,7 @@ export function Register() {
                 data
             ];
 
-            await AsyncStorage.setItem('@gofinances:transactions', JSON.stringify(dataFormatted));
+            await AsyncStorage.setItem(`@gofinances:transactions_user:${user.id}`, JSON.stringify(dataFormatted));
 
             reset();
             setTransactionType('');
@@ -125,6 +127,10 @@ export function Register() {
             key: 'category',
             name: 'Categoria'
         });
+
+        return () => {
+            isMounted.current = false;
+        };
     }, []));
 
     return (

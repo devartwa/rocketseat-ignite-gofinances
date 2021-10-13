@@ -34,7 +34,6 @@ export const Button = styled(RectButton)`
 export const Icon = styled(Feather) <TypeProps>`
     font-size: ${RFValue(24)}px;
     margin-right: 12px;
-
     color: ${({ isActive, theme, type }) => {
         if (isActive && type === 'negative') {
             return theme.colors.shape;
@@ -51,12 +50,15 @@ export const Icon = styled(Feather) <TypeProps>`
 export const Title = styled.Text<TypeProps>`
     font-size: ${RFValue(14)}px;
     font-family: ${({ theme }) => theme.fonts.regular};
-
-    ${({ isActive, type }) => isActive && type === 'positive' && css`
-        color: ${({ theme }) => theme.colors.shape};
-    `};
-
-    ${({ isActive, type }) => isActive && type === 'negative' && css`
-        color: ${({ theme }) => theme.colors.shape};
-    `};
+    color: ${({ isActive, theme, type }) => {
+        if (isActive && type === 'negative') {
+            return theme.colors.shape;
+        } else if (type === 'negative') {
+            return theme.colors.text_dark;
+        } else if (isActive && type === 'positive') {
+            return theme.colors.shape;
+        } else {
+            return theme.colors.text_dark;
+        }
+    }};
 `;

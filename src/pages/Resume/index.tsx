@@ -9,6 +9,7 @@ import { categories } from '../../utils/categories';
 import { useFocusEffect } from '@react-navigation/core';
 import { addMonths, subMonths, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useAuth } from '../../hooks/auth';
 
 import {
     Container,
@@ -25,6 +26,7 @@ import {
     MonthSelectButton,
     MonthSelectIcon,
 } from './styles';
+
 
 interface TransactionData {
     type: 'positive' | 'negative';
@@ -44,9 +46,12 @@ interface CategoryData {
 }
 
 export function Resume() {
+    const { user } = useAuth();
     const [loading, setLoading] = useState(true);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
+
+    const isMounted = React.useRef(true);
 
     function handleDateChange(action: 'next' | 'prev') {
         setLoading(true);
@@ -58,7 +63,7 @@ export function Resume() {
     }
 
     async function loadData() {
-        const data = await AsyncStorage.getItem('@gofinances:transactions');
+        const data = await AsyncStorage.getItem(`@gofinances:transactions_user:${user.id}`);
         const responseFormatted = data ? JSON.parse(data) : [];
 
         const expensives = responseFormatted
@@ -107,6 +112,10 @@ export function Resume() {
 
     useFocusEffect(useCallback(() => {
         loadData();
+
+        return () => {
+            isMounted.current = false;
+        };
     }, [selectedDate]));
 
     return (
@@ -132,7 +141,7 @@ export function Resume() {
                         <Loading size="small" color={theme.colors.primary} />
                     </ContainerLoading>
                     :
-                    <>
+                    <React.Fragment>
                         {
                             totalByCategories === null || totalByCategories.length <= 0
                                 ?
@@ -141,7 +150,7 @@ export function Resume() {
                                     <EmptyText>Não há itens a serem exibidos.</EmptyText>
                                 </EmptyView>
                                 :
-                                <>
+                                <React.Fragment>
                                     <ChartContainer>
                                         <VictoryPie
                                             data={totalByCategories}
@@ -174,9 +183,9 @@ export function Resume() {
                                             />
                                         )}
                                     </Content>
-                                </>
+                                </React.Fragment>
                         }
-                    </>
+                    </React.Fragment>
             }
         </Container >
     );
