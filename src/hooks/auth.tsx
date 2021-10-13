@@ -34,7 +34,6 @@ interface AuthResponse {
 interface AuthContextData {
     user: User;
     userLoading: boolean;
-    authLoading: boolean;
     googleAuth(): Promise<void>;
     appleAuth(): Promise<void>;
     facebookAuth(): Promise<void>;
